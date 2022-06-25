@@ -64,17 +64,13 @@ jobs:
           aws-region: ${{ steps.get_aws_region.outputs.result }}
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           role-session-name: pulumiawspipeline
-      - name: Setup Node version
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16
       - name: Install project dependencies
         working-directory: aws
         run: yarn install
-      - name: Setup kubectl version
-        uses: azure/setup-kubectl@v2.0
-        with:
-          version: v1.23.6
+      # - name: Setup kubectl version
+      #   uses: azure/setup-kubectl@v2.0
+      #   with:
+      #     version: v1.23.6
       - name: Run Pulumi Preview
         uses: pulumi/actions@v3
         with:

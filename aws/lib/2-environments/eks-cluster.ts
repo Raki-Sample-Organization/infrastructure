@@ -1,6 +1,5 @@
 import * as aws from '@pulumi/aws'
 import * as eks from '@pulumi/eks'
-import * as k8s from '@pulumi/kubernetes'
 import * as pulumi from '@pulumi/pulumi'
 import { ArgoCD } from './argocd'
 import { CrossplaneUser } from './crossplane-user'
@@ -9,18 +8,15 @@ import { Network } from './network'
 
 export class EksCluster {
     public readonly eksCluster!: eks.Cluster
-    public readonly k8sProvider!: k8s.Provider
 
     constructor(config: pulumi.Config, private readonly environment: string, private readonly network: Network) {
         const defaultInstanceRole = this.setDefaultInstanceRole()
         const eksCluster = this.setEksCluster(defaultInstanceRole)
         const nodegroup = this.setDefaultNodeGroup(eksCluster, defaultInstanceRole)
-        const provider = this.setK8sProviderFromEksCluster(eksCluster)
-        new ArgoCD({config, environment, provider, dependencies: [eksCluster, nodegroup]})
-        new CrossplaneUser({environment, provider, dependencies: [eksCluster, nodegroup]})
+        new ArgoCD({config, environment, provider: eksCluster.provider, dependencies: [eksCluster, nodegroup]})
+        new CrossplaneUser({environment, provider: eksCluster.provider, dependencies: [eksCluster, nodegroup]})
 
         this.eksCluster = eksCluster
-        this.k8sProvider = provider
     }
 
 
@@ -78,8 +74,4 @@ export class EksCluster {
                 nodegroup: `${this.clusterName()}-default`
             }
         })
-    
-    
-    private setK8sProviderFromEksCluster = (cluster: eks.Cluster): k8s.Provider =>
-        new k8s.Provider(this.clusterName(), { kubeconfig: cluster.kubeconfig })
 }
