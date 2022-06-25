@@ -1,6 +1,7 @@
 import * as pulumi from '@pulumi/pulumi'
 import { EksCluster } from './lib/2-environments/eks-cluster'
 import { Network } from './lib/2-environments/network'
+import { IAM } from './lib/1-org/iam'
 
 export interface InfrastructureOutput { }
 
@@ -10,7 +11,8 @@ export const mainInfrastructure = (config: pulumi.Config): InfrastructureOutput 
 
     // Environment resources
     const networkModule = new Network(config, environment)
-    const eksClusterModule = new EksCluster(config, environment, networkModule)
+    const iamModule = new IAM(environment)
+    const eksClusterModule = new EksCluster(config, environment, { network: networkModule, adminRoles: [iamModule.devOpsAdminRole] })
 
     // Outputs
     return {}
