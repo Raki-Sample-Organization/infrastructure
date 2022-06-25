@@ -6,10 +6,16 @@ import { CrossplaneUser } from './crossplane-user'
 import { Network } from './network'
 
 
+export interface EksClusterProps {
+    network: Network,
+    adminRoles: aws.iam.Role[]
+}
+
+
 export class EksCluster {
     public readonly eksCluster!: eks.Cluster
 
-    constructor(config: pulumi.Config, private readonly environment: string, private readonly network: Network) {
+    constructor(config: pulumi.Config, private readonly environment: string, private readonly props: EksClusterProps) {
         const defaultInstanceRole = this.setDefaultInstanceRole()
         const eksCluster = this.setEksCluster(defaultInstanceRole)
         const nodegroup = this.setDefaultNodeGroup(eksCluster, defaultInstanceRole)
@@ -45,16 +51,21 @@ export class EksCluster {
     private setEksCluster = (instanceRole: aws.iam.Role): eks.Cluster =>
         new eks.Cluster(this.clusterName(), {
             name: this.clusterName(),
-            vpcId: this.network.vpc.id,
-            publicSubnetIds: this.network.publicSubnets.map(_ => _.id),
-            privateSubnetIds: this.network.privateSubnets.map(_ => _.id),
+            vpcId: this.props.network.vpc.id,
+            publicSubnetIds: this.props.network.publicSubnets.map(_ => _.id),
+            privateSubnetIds: this.props.network.privateSubnets.map(_ => _.id),
             endpointPrivateAccess: true,
             version: '1.21',
             providerCredentialOpts: {
                 profileName: aws.config.profile
             },
             instanceRoles: [instanceRole],
-            skipDefaultNodeGroup: true
+            skipDefaultNodeGroup: true,
+            roleMappings: this.props.adminRoles.map(_ => ({
+                groups: ['system:masters'],
+                roleArn: _.arn,
+                username: 'admin'
+            }))
         })
 
 
