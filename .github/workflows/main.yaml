@@ -49,7 +49,7 @@ jobs:
           stack-name: ${{ matrix.stack }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cloud-url: ${{ secrets.PULUMI_BACKEND_URL }}
-          # secrets-provider:
+          secrets-provider: ${{ secrets.PULUMI_SECRETS_PROVIDER }}
           refresh: true
         env:
           PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
