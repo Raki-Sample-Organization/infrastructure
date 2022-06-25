@@ -3,15 +3,13 @@ import * as aws from '@pulumi/aws'
 
 export class IAM {
     public readonly devOpsAdminRole!: aws.iam.Role
-    public readonly devOpsAdminGroup!: aws.iam.Group
 
     constructor(private readonly environment: string) {
         const devOpsAdminRole = this.setDevOpsAdminRole()
-        const devOpsAdminGroup = this.setDevOpsAdminGroup(this.devOpsAdminRole)
         this.setDevOpsAdminRolePolicy(devOpsAdminRole)
+        this.setDevOpsAdminGroup(devOpsAdminRole)
         
         this.devOpsAdminRole = devOpsAdminRole
-        this.devOpsAdminGroup = devOpsAdminGroup
     }
 
 
@@ -20,6 +18,23 @@ export class IAM {
             name: `${this.environment}-devops-admin`,
             assumeRolePolicy: aws.getCallerIdentity().then(_ => aws.iam.assumeRolePolicyForPrincipal({ AWS: `arn:aws:iam::${_.accountId}:root` }))
         })
+
+
+    private setDevOpsAdminGroup = (role: aws.iam.Role): aws.iam.Group => {
+        const group = new aws.iam.Group('devops-admin', { name: `${this.environment}-devops-admin` })
+        new aws.iam.GroupPolicy('devops-admin', {
+            name: `${this.environment}-devops-admin`,
+            group: group.name,
+            policy: aws.iam.getPolicyDocumentOutput({
+                statements: [{
+                    sid: 'AllowAssumeOrganizationAccountRole',
+                    actions: ['sts:AssumeRole'],
+                    resources: [role.arn]
+                }],
+            }).json
+        })
+        return group
+    }
 
 
     private setDevOpsAdminRolePolicy = (role: aws.iam.Role): aws.iam.RolePolicy =>
@@ -43,21 +58,4 @@ export class IAM {
                 ],
             }).json
         })
-
-
-    private setDevOpsAdminGroup = (role: aws.iam.Role): aws.iam.Group => {
-        const group = new aws.iam.Group('devops-admin', { name: `${this.environment}-devops-admin` })
-        new aws.iam.GroupPolicy('devops-admin', {
-            name: `${this.environment}-devops-admin`,
-            group: group.name,
-            policy: aws.iam.getPolicyDocumentOutput({
-                statements: [{
-                    sid: 'AllowAssumeOrganizationAccountRole',
-                    actions: ['sts:AssumeRole'],
-                    resources: [role.arn]
-                }],
-            }).json
-        })
-        return group
-    }
 }
