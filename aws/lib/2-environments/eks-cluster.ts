@@ -15,12 +15,11 @@ export class EksCluster {
         const defaultInstanceRole = this.setDefaultInstanceRole()
         const eksCluster = this.setEksCluster(defaultInstanceRole)
         const nodegroup = this.setDefaultNodeGroup(eksCluster, defaultInstanceRole)
-        const provider = this.setK8sProviderFromEksCluster(eksCluster)
-        new ArgoCD({config, environment, provider, dependencies: [eksCluster, nodegroup]})
-        new CrossplaneUser({environment, provider, dependencies: [eksCluster, nodegroup]})
+        new ArgoCD({config, environment, provider: eksCluster.provider, dependencies: [eksCluster, nodegroup]})
+        new CrossplaneUser({environment, provider: eksCluster.provider, dependencies: [eksCluster, nodegroup]})
 
         this.eksCluster = eksCluster
-        this.k8sProvider = provider
+        this.k8sProvider = eksCluster.provider
     }
 
 
@@ -78,8 +77,4 @@ export class EksCluster {
                 nodegroup: `${this.clusterName()}-default`
             }
         })
-    
-    
-    private setK8sProviderFromEksCluster = (cluster: eks.Cluster): k8s.Provider =>
-        new k8s.Provider(this.clusterName(), { kubeconfig: cluster.kubeconfig })
 }
