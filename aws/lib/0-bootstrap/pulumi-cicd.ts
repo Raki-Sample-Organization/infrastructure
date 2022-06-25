@@ -9,8 +9,8 @@ export class PulumiCICD {
 
 
     constructor (private readonly config: pulumi.Config) {
-        const secretProviderKeyId = this.setSecretProviderKey(`${this.config.get('organizationName')}/${pulumi.getStack()}/pulumi-secret-provider`).keyId
-        const backendBucketName = this.setBackendBucket(`${this.config.get('organizationName')}-${pulumi.getStack()}-pulumi-backend`).bucket
+        const secretProviderKeyId = this.setSecretProviderKey(`${this.config.get('organizationName')}/pulumi-secret-provider`).keyId
+        const backendBucketName = this.setBackendBucket(`${this.config.get('organizationName')}-pulumi-backend`).bucket
         this.setAwsRolePolicy(this.setAwsRole(this.setGitHubIdentityProvider()))
 
         this.secretProviderKeyId = secretProviderKeyId

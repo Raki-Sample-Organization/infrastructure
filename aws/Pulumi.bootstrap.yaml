@@ -1,11 +1,11 @@
----
-encryptionsalt: v1:/jda8mFpBSQ=:v1:NPvNiouT7OSaiWFl:G6TmJda3TG2zuZhgcKQf/EpGJ2qiIA==
+secretsprovider: awskms://857e2580-f57a-4351-8885-10f749d48e2d
+encryptedkey: AQICAHhem8qSv7Vq8x/AZzCrAQaaGJXDPM1HO1r4+iOYhQB5VwGgApezxrljPe010ygfD9aaAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM4DaDa5sTUelmB3MqAgEQgDu/kk0c2j/5zgXv/0pHth2Bz2npZ/YUEBxowgl6oKkGoQGhqYSJatN69oyTNAfvzEQVNRU7pCTbF2dKDw==
 config:
   aws:defaultTags:
     tags:
       Environment: production
-      Org: raki
+      Org: raki-sample-org
   aws:region: us-east-1
-  raki:githubOrg: pedrodotmc
-  raki:githubRepo: raki-aws
-  raki:organizationName: raki
+  raki-sample-org:githubOrg: Raki-Sample-Organization
+  raki-sample-org:githubRepo: infrastructure
+  raki-sample-org:organizationName: raki-sample-org

@@ -1,4 +1,4 @@
 ---
-name: raki
+name: raki-sample-org
 runtime: nodejs
 description: AWS Infrastructure for raki organization
