@@ -30,10 +30,6 @@ jobs:
           aws-region: ${{ steps.get_aws_region.outputs.result }}
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           role-session-name: rakiawspipeline
-      - name: Setup Node version
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16
       - name: Install project dependencies
         working-directory: aws
         run: yarn install
