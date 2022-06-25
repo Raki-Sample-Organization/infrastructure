@@ -6,7 +6,7 @@ config:
       Environment: production
       Org: raki-sample-org
   aws:region: us-east-1
-  raki-sample-org:infraRepositoryName: raki-aws
+  raki-sample-org:infraRepositoryName: Raki-Sample-Organization
   raki-sample-org:infraRepositoryUrl: git@github.com:Raki-Sample-Organization/infrastructure
   raki-sample-org:k8sResourcesPath: k8s/overlays/production
   raki-sample-org:organizationName: raki-sample-org
