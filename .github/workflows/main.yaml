@@ -46,3 +46,4 @@ jobs:
         env:
           # Variable for Pulumi GitHub provider
           GITHUB_TOKEN: ${{ secrets.PULUMI_PROVIDER_GITHUB_TOKEN }}
+          GITHUB_OWNER: Raki-Sample-Organization
