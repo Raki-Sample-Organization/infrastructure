@@ -89,7 +89,8 @@ export class ArgoCD {
                 name: 'argocd-infra-repo-credentials',
                 namespace: ns.metadata.name,
                 labels: {
-                    'argocd.argoproj.io/secret-type': 'repository'
+                    'argocd.argoproj.io/secret-type': 'repository',
+                    'app.kubernetes.io/managed-by': 'pulumi'
                 }
             },
             stringData: {
