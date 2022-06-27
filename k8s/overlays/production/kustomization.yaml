@@ -5,8 +5,4 @@ resources:
   - ./../../base/argo-rollouts
   - ./../../base/argocd
   - ./../../base/crossplane-system
-  - ./../../base/sample-app
-  # Cloud level resources
-  - sample-app.yaml
-patchesStrategicMerge:
-  - sample-app-patches.yaml
+  - ./sample-app
