@@ -7,5 +7,4 @@ config:
       Org: raki-sample-org
   aws:region: us-east-1
   raki-sample-org:githubOrg: Raki-Sample-Organization
-  raki-sample-org:githubRepo: infrastructure
   raki-sample-org:organizationName: raki-sample-org

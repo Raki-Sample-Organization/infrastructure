@@ -65,7 +65,7 @@ export class PulumiCICD {
                             {
                                 test: 'StringLike',
                                 variable: 'token.actions.githubusercontent.com:sub',
-                                values: [`repo:${this.config.get('githubOrg')}/${this.config.get('githubRepo')}:*`]
+                                values: [`repo:${this.config.get('githubOrg')}/*`]
                             }
                         ]
                     }
