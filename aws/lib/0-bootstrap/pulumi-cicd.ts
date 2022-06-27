@@ -91,7 +91,9 @@ export class PulumiCICD {
                             "eks:*",
                             "ssm:*",
                             "autoscaling:*",
-                            "cloudformation:*"
+                            "cloudformation:*",
+                            // Services
+                            "ecr:*"
                         ],
                         resources: ["*"],
                     }
