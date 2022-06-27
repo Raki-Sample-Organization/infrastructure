@@ -1,0 +1,27 @@
+---
+apiVersion: database.aws.crossplane.io/v1beta1
+kind: DBSubnetGroup
+metadata:
+  name: sample-app
+  annotations:
+    crossplane.io/external-name: raki-sample-org-ephemeral-sample-app
+spec:
+  forProvider:
+    description: Subnet group for sample-app application (ephemeral environment)
+    subnetIds:
+      - subnet-061a9bac4d8523a42
+      - subnet-0d56eb9abcb5355cf
+      - subnet-077c55c98a67060e7
+      - subnet-0391dd55f347f91e2
+      - subnet-0f3ac66bf33851d27
+      - subnet-0629b35560a0ad498
+---
+apiVersion: database.aws.crossplane.io/v1beta1
+kind: RDSInstance
+metadata:
+  name: sample-app-postgres
+  annotations:
+    crossplane.io/external-name: raki-sample-org-ephemeral-sample-app-pg
+spec:
+  forProvider:
+    dbSubnetGroupName: raki-sample-org-ephemeral-sample-app

@@ -1,0 +1,8 @@
+---
+commonLabels:
+  environment: ephemeral
+resources:
+  - ./../../../base/sample-app
+  - namespace.yaml
+patchesStrategicMerge:
+  - sample-app-patches.yaml
