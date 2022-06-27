@@ -1,0 +1,22 @@
+---
+apiVersion: database.aws.crossplane.io/v1beta1
+kind: RDSInstance
+metadata:
+  name: sample-app-postgres
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    region: us-east-1
+    engine: postgres
+    engineVersion: "14"
+    dbInstanceClass: db.t3.micro
+    allocatedStorage: 20
+    masterUsername: sample_app
+    dbName: sampleappdb
+    backupRetentionPeriod: 0
+    skipFinalSnapshotBeforeDeletion: true
+  writeConnectionSecretToRef:
+    name: sample-app-postgres-rds-instance
+    namespace: sample-app

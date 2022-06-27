@@ -32,10 +32,10 @@ export class CrossplaneUser {
                     {
                         // Define here permissions and resources for Crossplane
                         actions: [
-                            's3:*'
+                            'rds:*'
                         ],
                         resources: [
-                            `arn:aws:s3:::${this.props.environment}-*`,
+                            `arn:aws:rds:::${this.props.environment}-*`,
                         ]
                     }
                 ],
