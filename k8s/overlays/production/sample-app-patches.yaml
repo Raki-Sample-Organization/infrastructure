@@ -1,15 +1,5 @@
 ---
 apiVersion: database.aws.crossplane.io/v1beta1
-kind: RDSInstance
-metadata:
-  name: sample-app-postgres
-  annotations:
-    crossplane.io/external-name: raki-sample-org-production-sample-app-pg
-spec:
-  forProvider:
-    dbSubnetGroupName: raki-sample-org-production-sample-app
----
-apiVersion: database.aws.crossplane.io/v1beta1
 kind: DBSubnetGroup
 metadata:
   name: sample-app
@@ -25,3 +15,13 @@ spec:
       - subnet-0a0f7a118a65a9352
       - subnet-0b2dee9cef9f0d6ae
       - subnet-0ed2cced03b8ea26f
+---
+apiVersion: database.aws.crossplane.io/v1beta1
+kind: RDSInstance
+metadata:
+  name: sample-app-postgres
+  annotations:
+    crossplane.io/external-name: raki-sample-org-production-sample-app-pg
+spec:
+  forProvider:
+    dbSubnetGroupName: raki-sample-org-production-sample-app
