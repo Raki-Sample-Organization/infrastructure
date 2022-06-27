@@ -6,7 +6,8 @@ config:
       Environment: staging
       Org: raki-sample-org
   aws:region: us-east-1
-  raki-sample-org:infraRepositoryName: Raki-Sample-Organization
+  github:owner: Raki-Sample-Organization
+  raki-sample-org:infraRepositoryName: infrastructure
   raki-sample-org:infraRepositoryUrl: git@github.com:Raki-Sample-Organization/infrastructure
   raki-sample-org:k8sResourcesPath: k8s/overlays/staging
   raki-sample-org:organizationName: raki-sample-org
