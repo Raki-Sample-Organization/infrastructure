@@ -1,0 +1,26 @@
+---
+apiVersion: ecr.aws.crossplane.io/v1beta1
+kind: Repository
+metadata:
+  name: sample-app
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  forProvider:
+    region: us-east-1
+    imageScanningConfiguration:
+      scanOnPush: false
+    imageTagMutability: IMMUTABLE
+---
+apiVersion: ecr.aws.crossplane.io/v1beta1
+kind: Repository
+metadata:
+  name: sample-app-it
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  forProvider:
+    region: us-east-1
+    imageScanningConfiguration:
+      scanOnPush: false
+    imageTagMutability: IMMUTABLE
