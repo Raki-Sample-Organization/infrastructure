@@ -28,15 +28,19 @@ export class CrossplaneUser {
         new aws.iam.UserPolicy('crossplane', {
             user: user.name,
             policy: aws.iam.getPolicyDocumentOutput({
+                // Define here permissions and resources for Crossplane
                 statements: [
                     {
-                        // Define here permissions and resources for Crossplane
-                        actions: [
-                            'rds:*'
-                        ],
+                        actions: ['rds:*'],
                         resources: [
                             `arn:aws:rds:::${this.props.environment}-*`,
+                            `arn:aws:rds:*:*:subgrp:${this.props.environment}-*`,
+                            `arn:aws:rds:*:*:secgrp:${this.props.environment}-*`,
                         ]
+                    },
+                    {
+                        actions: ['ecr:*'],
+                        resources: ['*']
                     }
                 ],
             }).json
