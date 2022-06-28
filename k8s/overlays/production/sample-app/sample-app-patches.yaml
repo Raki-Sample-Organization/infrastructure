@@ -1,4 +1,28 @@
 ---
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: sample-app-rds
+  annotations:
+    crossplane.io/external-name: raki-sample-org-production-sample-app-rds
+spec:
+  forProvider:
+    groupName: raki-sample-org-production-sample-app-rds
+    ingress:
+      - fromPort: 5432
+        toPort: 5432
+        ipProtocol: tcp
+        userIDGroupPairs:
+          - description: Allow connections from EKS cluster security group
+            groupId: sg-006111a78911238c0
+    egress:
+      - fromPort: -1
+        toPort: -1
+        ipProtocol: -1
+        ipRanges:
+          - description: Allow all egress traffic
+            cidrIp: 0.0.0.0/0
+---
 apiVersion: database.aws.crossplane.io/v1beta1
 kind: DBSubnetGroup
 metadata:
@@ -22,6 +46,3 @@ metadata:
   name: sample-app-postgres
   annotations:
     crossplane.io/external-name: raki-sample-org-production-sample-app-pg
-spec:
-  forProvider:
-    dbSubnetGroupName: raki-sample-org-production-sample-app

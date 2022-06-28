@@ -3,7 +3,5 @@ commonLabels:
   environment: production
 resources:
   - ./../../../base/sample-app
-  - ecr-repositories.yaml
-  - namespace.yaml
 patchesStrategicMerge:
   - sample-app-patches.yaml

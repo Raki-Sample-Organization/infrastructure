@@ -3,5 +3,7 @@ namespace: sample-app
 commonLabels:
   app.kubernetes.io/managed-by: argocd
 resources:
+  - ecr-repositories.yaml
   - rds-instance.yaml
+  - rds-security-group.yaml
   - subnet-group.yaml
