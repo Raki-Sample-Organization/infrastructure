@@ -42,6 +42,10 @@ export class CrossplaneUser {
                     {
                         actions: ['ecr:*'],
                         resources: ['*']
+                    },
+                    {
+                        actions: ['ec2:*'],
+                        resources: ['*']
                     }
                 ],
             }).json
