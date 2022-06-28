@@ -3,7 +3,7 @@ namespace: sample-app-ephemeral
 commonLabels:
   environment: ephemeral
 resources:
-  - ./../../../base/sample-app/rds-instance.yaml
+  - ./../../../base/sample-app/rds-instance
   - namespace.yaml
 patchesStrategicMerge:
   - sample-app-patches.yaml
