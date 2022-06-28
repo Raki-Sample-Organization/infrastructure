@@ -12,7 +12,7 @@ spec:
       - fromPort: 5432
         toPort: 5432
         ipProtocol: tcp
-        userIDGroupPairs:
+        userIdGroupPairs:
           - description: Allow connections from EKS cluster security group
             groupId: sg-006111a78911238c0
     egress:
