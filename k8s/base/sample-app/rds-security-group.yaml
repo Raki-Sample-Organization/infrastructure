@@ -10,3 +10,4 @@ spec:
   forProvider:
     description: Security group for sample-app RDS instance
     region: us-east-1
+    vpcId: vpc-08b18c12f7dad480e
