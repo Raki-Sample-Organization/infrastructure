@@ -24,4 +24,3 @@ spec:
       - name: sample-app-rds
   writeConnectionSecretToRef:
     name: sample-app-postgres-rds-instance
-    namespace: sample-app

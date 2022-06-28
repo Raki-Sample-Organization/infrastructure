@@ -44,3 +44,6 @@ metadata:
   name: sample-app-postgres
   annotations:
     crossplane.io/external-name: raki-sample-org-production-sample-app-pg
+spec:
+  writeConnectionSecretToRef:
+    namespace: sample-app

@@ -5,3 +5,6 @@ metadata:
   name: sample-app-postgres
   annotations:
     crossplane.io/external-name: raki-sample-org-ephemeral-sample-app-pg
+spec:
+  writeConnectionSecretToRef:
+    namespace: sample-app-ephemeral
