@@ -4,6 +4,7 @@ commonLabels:
   app.kubernetes.io/managed-by: argocd
 resources:
   - ecr-repositories.yaml
+  - namespace.yaml
   - rds-instance.yaml
   - rds-security-group.yaml
   - subnet-group.yaml
