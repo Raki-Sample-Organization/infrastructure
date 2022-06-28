@@ -3,8 +3,6 @@ apiVersion: ec2.aws.crossplane.io/v1beta1
 kind: SecurityGroup
 metadata:
   name: sample-app-rds
-  annotations:
-    crossplane.io/external-name: raki-sample-org-production-sample-app-rds
 spec:
   forProvider:
     groupName: raki-sample-org-production-sample-app-rds
