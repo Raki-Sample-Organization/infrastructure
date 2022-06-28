@@ -21,7 +21,7 @@ spec:
       name: sample-app
     vpcSecurityGroupIds: []
     vpcSecurityGroupIDRefs:
-      name: sample-app-rds
+      - name: sample-app-rds
   writeConnectionSecretToRef:
     name: sample-app-postgres-rds-instance
     namespace: sample-app
