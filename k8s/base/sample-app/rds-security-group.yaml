@@ -9,3 +9,4 @@ spec:
   deletionPolicy: Delete
   forProvider:
     description: Security group for sample-app RDS instance
+    region: us-east-1
