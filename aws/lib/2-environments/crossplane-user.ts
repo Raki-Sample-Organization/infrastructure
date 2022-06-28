@@ -32,12 +32,7 @@ export class CrossplaneUser {
                 statements: [
                     {
                         actions: ['rds:*'],
-                        resources: [
-                            `arn:aws:rds:::${this.props.environment}-*`,
-                            `arn:aws:rds:*:*:db:${this.props.environment}-*`,
-                            `arn:aws:rds:*:*:subgrp:${this.props.environment}-*`,
-                            `arn:aws:rds:*:*:secgrp:${this.props.environment}-*`
-                        ]
+                        resources: ['*']
                     },
                     {
                         actions: ['ecr:*'],
