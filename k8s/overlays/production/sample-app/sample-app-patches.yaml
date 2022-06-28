@@ -18,7 +18,7 @@ spec:
     egress:
       - fromPort: -1
         toPort: -1
-        ipProtocol: -1
+        ipProtocol: "-1"
         ipRanges:
           - description: Allow all egress traffic
             cidrIp: 0.0.0.0/0
